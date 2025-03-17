@@ -6,7 +6,14 @@ router.get('/', (req,res) => {
 })
 
 router.post('/', (req,res) => {
-    res.send("you have reached the post request!")
+    // Get the data from the request
+    const { firstName, email, password } = req.body
+    res.json({
+        firstName,
+        email,
+        password,
+        _id: "randomId4567",
+    })
 })
 
 
