@@ -3,6 +3,8 @@ const app = express();
 const port = 3000;
 const userRoutes = require("./routes/users")
 
+const connectDB = require("./utils/db");
+
 // MIDDLEWARE
 app.use(express.json())
 // app.use((req, res, next) => {
@@ -35,3 +37,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
+
+connectDB()
