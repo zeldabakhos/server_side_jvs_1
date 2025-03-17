@@ -1,7 +1,6 @@
 const express = require("express")
 const router = express.Router()
 const { hashPassword } = require("../middleware/passencrypt")
-const { usersController } = require("../controllers/userControllers")
 
 router.get('/', (req,res) => {
     res.send('Users page')
