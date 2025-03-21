@@ -1,4 +1,7 @@
 const User = require("../models/userModels")
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+require("dotenv").config()
 
 exports.userLogin = async (req, res) => {
     const { email, password } = req.body
@@ -20,7 +23,7 @@ exports.userLogin = async (req, res) => {
         )
         res.status(200).json(token)
     }
-    catch {
+    catch (err) {
         res.status(401).json({ 
             message: err.message,
         })
