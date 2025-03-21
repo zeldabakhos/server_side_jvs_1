@@ -3,9 +3,9 @@ const router = express.Router()
 const { hashPassword } = require("../middleware/passencrypt")
 const { userLogin, userSignUp } = require("../controllers/userControllers")
 
-router.get("/", userLogin)    
+router.post("/login", userLogin)    
 
-router.post('/', hashPassword, userSignUp)
+router.post("/signup", hashPassword, userSignUp)
 
 
 module.exports = router;

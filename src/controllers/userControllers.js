@@ -1,8 +1,31 @@
 const User = require("../models/userModels")
 
-exports.userLogin = (req, res) => {
-    res.send("User login")
-}
+exports.userLogin = async (req, res) => {
+    const { email, password } = req.body
+    try {
+        const foundUser = await User.findOne({ email })
+        if (!foundUser) {
+            throw new Error("Invalid credentials")
+        }
+        const passwordMatch = await bcrypt.compare(password, foundUser.password)
+        if (!passwordMatch) {
+            throw new Error("Invalid credentials")
+        }
+        const token = jwt.sign(
+            {
+                userId: foundUser._id,
+            },
+            process.env.SECRET_TOKEN_KEY,
+            { expiresIn: "24h"}
+        )
+        res.status(200).json(token)
+    }
+    catch {
+        res.status(401).json({ 
+            message: err.message,
+        })
+    }
+};
 
 exports.userSignUp = async (req, res) => {
     const { firstName, email, lastName, imageUrl, role } = req.body
