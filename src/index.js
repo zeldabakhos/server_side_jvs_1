@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const userRoutes = require("./routes/users")
+const path = require("path")
 
 const connectDB = require("./utils/db");
 
@@ -37,5 +38,7 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 connectDB()
