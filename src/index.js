@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
 const port = 3000;
-const userRoutes = require("./routes/users")
 const path = require("path")
 
+const userRoutes = require("./routes/users")
+const productRoutes = require("./routes/products")
 const connectDB = require("./utils/db");
 
 // MIDDLEWARE
@@ -16,6 +17,7 @@ app.use(express.json())
 
 // ROUTES
 app.use("/api/users", userRoutes)
+app.use("/api/products", productRoutes)
 
 // cors middleware
 app.use((req, res, next) => {
@@ -30,10 +32,6 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
     res.send("Welcome to my API ! e-commerce backed 🤳")
    })
-
-// app.get("/", (req, res) => {
-//     res.send(`Request Time: ${req.requestTime} | Arithmetical Value: ${req.arithmetical_value}`);
-// });
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
